@@ -1,5 +1,5 @@
 .track {
-  border: 1px solid green;
+  border: 1px solid gray;
   padding: inherit;
   margin-bottom: 8px;
   color: white;
@@ -7,6 +7,10 @@
   display: grid;
   grid-template-columns: 59% 20% 20%;
   grid-gap: 1%;
+}
+
+.track.active {
+  border: 1px solid green;
 }
 
 .track .name {

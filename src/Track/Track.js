@@ -7,7 +7,9 @@ class Track extends React.Component {
   constructor(props) {
     super(props);
 
+    let { track } = this.props;
     this.state = {
+      track: track,
       timer: undefined,
     };
 
@@ -24,7 +26,7 @@ class Track extends React.Component {
     startTrackCall(track)
       .then((response) => {
         console.log("start track call", response);
-        this.setState({ timer: response.timer });
+        this.setState({ track: response.track, timer: response.timer });
       })
       .catch((error) => {
         console.error("start track call", error);
@@ -39,6 +41,7 @@ class Track extends React.Component {
     stopTrackCall(timer)
       .then((data) => {
         console.log("stop track call", data);
+        this.setState({ track: data.track, timer: data.timer });
       })
       .catch((error) => {
         console.error("stop track call", error);
@@ -58,14 +61,17 @@ class Track extends React.Component {
       this.totalDays +=
         this.totalDays + totalMiliSeconds / (1000 * 60 * 60 * 24);
     }
-    this.setState({ calculated: true });
+    this.setState({ calculated: true }); // force re render
   };
 
   render() {
-    let { track } = this.props;
+    // let { track } = this.props;
+    let { track } = this.state;
+
+    let trackClass = ["track", track.isActive && "active"].join(" ");
 
     return (
-      <div className="track">
+      <div className={trackClass}>
         <div className="name">{track.track_label}</div>
         <button type="button" onClick={this.startTrack}>
           Start
