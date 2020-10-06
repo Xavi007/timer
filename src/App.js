@@ -26,21 +26,34 @@ class App extends React.Component {
       });
   };
 
+  saveList = () => {
+    // get all tracks;
+    // create
+  };
+
   render() {
     let { tracks } = this.state;
     return (
       <div className="time-tracker">
+        <div className="new-track">
+          <input name="label" type="text" placeholder="Track name" />
+          <button type="button" onClick={this.createTrack}>
+            Add
+          </button>
+        </div>
+        {tracks && <div className="tracks-title">{tracks.length} tracks:</div>}
         {tracks &&
           tracks.map((track, index) => {
             return <Track key={index} track={track} />;
           })}
 
-        <div className="new-track">
-          <input name="label" type="text" />
-          <button type="button" onClick={this.createTrack}>
-            Add
-          </button>
-        </div>
+        {tracks && (
+          <div className="save-list">
+            <button type="button" className="save" onClick={this.saveList}>
+              Save
+            </button>
+          </div>
+        )}
       </div>
     );
   }

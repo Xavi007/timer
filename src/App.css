@@ -14,4 +14,14 @@
   display: grid;
   grid-template-columns: 79% 20%;
   grid-gap: 1%;
+  margin: 4px 0;
+}
+
+.time-tracker .tracks-title {
+  padding: 4px;
+  font-size: 16px;
+  color: lightgray;
+}
+.time-tracker .save-list .save {
+  color: red;
 }

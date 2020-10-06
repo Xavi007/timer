@@ -22,7 +22,21 @@
   display: grid;
   grid-template-columns: 32% 33% 32%;
   grid-gap: 1%;
+  color: lightgray;
 }
 .track .time-info div {
   padding: 4px;
+}
+.track .time-info .hours {
+  color: white;
+}
+
+.track .track-meta {
+  font-size: 14px;
+  padding: 4px;
+
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
 }
