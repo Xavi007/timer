@@ -11,6 +11,18 @@ class App extends React.Component {
     this.state = {
       tracks: [],
     };
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+
+      this.beforeInstall = e;
+
+      e.prompt();
+      // this.setState({ beforeInstall: true });
+      // console.log("RESULT PWA PROMPT 2", this.beforeInstall);
+    });
   }
   createTrack = () => {
     const label = this.labelInput.value;
