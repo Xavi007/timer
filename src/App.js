@@ -8,12 +8,12 @@ let beforeInstallPrompt = undefined;
 
 class App extends React.Component {
   render() {
-    let { isApp } = this.state;
-    console.log(" App STATE", isApp);
+    let { isRunning } = this.state;
+    console.log(" App STATE", isRunning);
     return (
       <div className="App">
-        <Timer ref="timer" />
-        <TimeButton startTimer={this.startTimer} />
+        <Timer ref="timer" reset={this.reset} />
+        {!isRunning && <TimeButton startTimer={this.startTimer} />}
         <button type="button" onClick={install}>
           Install
         </button>
@@ -24,9 +24,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    let isApp = true;
+    let isRunning = false;
 
-    this.state = { isApp };
+    this.state = { isRunning };
   }
 
   componentDidMount() {
@@ -36,7 +36,11 @@ class App extends React.Component {
   componentWillUnmount() {}
 
   startTimer = () => {
-    this.refs.timer.startTimer();
+    this.setState({ isRunning: true }, this.refs.timer.startTimer());
+  };
+
+  reset = () => {
+    this.setState({ isRunning: false });
   };
 }
 

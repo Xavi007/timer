@@ -10,6 +10,8 @@ class Timer extends React.Component {
         if (minutes === 0) {
           new Notification("Times up!");
           clearInterval(this.minuteInterval);
+          let { reset } = this.props;
+          reset();
         }
       });
     }, 60 * 1000);
