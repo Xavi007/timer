@@ -1,91 +1,69 @@
 import React from "react";
 import "./App.css";
 
-import { createTrackCall, fetchTracksCall } from "./apis/calls";
+let beforeInstallPrompt = undefined;
 
-import Track from "./Track/Track";
+const App = () => {
+  beforeInstall();
+  installUserChoice();
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tracks: [],
-    };
+  return (
+    <div className="App">
+      <div className="timer">30 mins</div>
+      {Notification.permission !== "granted" && (
+        <button type="button" onClick={setupNotify}>
+          Notify
+        </button>
+      )}
+      {Notification.permission === "granted" && (
+        <button type="button" onClick={startTimer}>
+          Start
+        </button>
+      )}
+      <button type="button" onClick={install}>
+        Install
+      </button>
+    </div>
+  );
+};
 
-    window.addEventListener("beforeinstallprompt", (e) => {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
-      e.preventDefault();
-      // Stash the event so it can be triggered later.
-
-      this.beforeInstall = e;
-
-      e.prompt();
-      // this.setState({ beforeInstall: true });
-      // console.log("RESULT PWA PROMPT 2", this.beforeInstall);
+const setupNotify = () => {
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  } else if (Notification.permission === "granted") {
+    new Notification("Permission already granted!");
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        new Notification("Granted!");
+      }
     });
   }
-  createTrack = () => {
-    const label = this.labelInput.value;
-    if (!label) return;
-    console.log("LABEL", label);
-    createTrackCall({ label: label })
-      .then(() => {
-        console.log("response 1");
-        this.fetchTracks();
-      })
-      .catch((error) => {
-        console.error("CREATE track call", error);
-      });
-  };
+};
 
-  saveList = () => {
-    // get all tracks;
-    // create
-  };
+const startTimer = () => {
+  // reset timer to 30 mins
+  // start countdown
+  // notify on time up
+};
 
-  render() {
-    let { tracks } = this.state;
-    return (
-      <div className="time-tracker">
-        <div className="new-track">
-          <input name="label" type="text" placeholder="Track name" />
-          <button type="button" onClick={this.createTrack}>
-            Add
-          </button>
-        </div>
-        {tracks && <div className="tracks-title">{tracks.length} tracks:</div>}
-        {tracks &&
-          tracks.map((track, index) => {
-            return <Track key={index} track={track} />;
-          })}
+const beforeInstall = () => {
+  window.addEventListener("beforeinstallprompt", (e) => {
+    beforeInstallPrompt = e;
+  });
+};
 
-        {tracks && (
-          <div className="save-list">
-            <button type="button" className="save" onClick={this.saveList}>
-              Save
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  }
+const installUserChoice = () => {
+  if (!beforeInstallPrompt) return;
+  beforeInstallPrompt.userChoice.then((choice) => {
+    console.log("USER INSTALL", choice.outcome);
+  });
+};
 
-  componentDidMount() {
-    console.log("fetch 3", fetchTracksCall);
-    this.fetchTracks();
-    this.labelInput = document.querySelector('input[name="label"]');
-  }
+const install = () => {
+  if (!beforeInstallPrompt) return;
 
-  fetchTracks = () => {
-    fetchTracksCall()
-      .then((data) => {
-        console.log("FETCH tracks call", data);
-        this.setState({ tracks: data.tracks });
-      })
-      .catch((error) => {
-        console.error("FETCH tracks call", error);
-      });
-  };
-}
+  beforeInstallPrompt.prompt();
+};
 
 export default App;
