@@ -1,51 +1,44 @@
 import React from "react";
 import "./App.css";
 
+import TimeButton from "./components/TimeButton";
+import Timer from "./components/Timer";
+
 let beforeInstallPrompt = undefined;
 
-const App = () => {
-  beforeInstall();
-  installUserChoice();
-
-  return (
-    <div className="App">
-      <div className="timer">30 mins</div>
-      {Notification.permission !== "granted" && (
-        <button type="button" onClick={setupNotify}>
-          Notify
+class App extends React.Component {
+  render() {
+    let { isApp } = this.state;
+    console.log(" App STATE", isApp);
+    return (
+      <div className="App">
+        <Timer ref="timer" />
+        <TimeButton startTimer={this.startTimer} />
+        <button type="button" onClick={install}>
+          Install
         </button>
-      )}
-      {Notification.permission === "granted" && (
-        <button type="button" onClick={startTimer}>
-          Start
-        </button>
-      )}
-      <button type="button" onClick={install}>
-        Install
-      </button>
-    </div>
-  );
-};
-
-const setupNotify = () => {
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
-  } else if (Notification.permission === "granted") {
-    new Notification("Permission already granted!");
-  } else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        new Notification("Granted!");
-      }
-    });
+      </div>
+    );
   }
-};
 
-const startTimer = () => {
-  // reset timer to 30 mins
-  // start countdown
-  // notify on time up
-};
+  constructor(props) {
+    super(props);
+
+    let isApp = true;
+
+    this.state = { isApp };
+  }
+
+  componentDidMount() {
+    beforeInstall();
+    installUserChoice();
+  }
+  componentWillUnmount() {}
+
+  startTimer = () => {
+    this.refs.timer.startTimer();
+  };
+}
 
 const beforeInstall = () => {
   window.addEventListener("beforeinstallprompt", (e) => {

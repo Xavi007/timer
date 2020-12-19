@@ -1,27 +1,8 @@
-.time-tracker {
-  min-height: 100vh;
-  background-color: black;
-  padding: 4px;
-
+.App {
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
-}
-
-.time-tracker .new-track {
-  padding: inherit;
-
-  display: grid;
-  grid-template-columns: 79% 20%;
-  grid-gap: 1%;
-  margin: 4px 0;
-}
-
-.time-tracker .tracks-title {
-  padding: 4px;
-  font-size: 16px;
-  color: lightgray;
-}
-.time-tracker .save-list .save {
-  color: red;
+  justify-content: space-around;
+  align-items: center;
 }
