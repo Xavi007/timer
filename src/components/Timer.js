@@ -3,18 +3,11 @@ import "./timer.css";
 
 class Timer extends React.Component {
   startTimer = () => {
-    this.minuteInterval = setInterval(() => {
-      let { minutes } = this.state;
-      this.setState({ minutes: minutes - 1 }, () => {
-        let { minutes } = this.state;
-        if (minutes === 0) {
-          new Notification("Times up!");
-          clearInterval(this.minuteInterval);
-          let { reset } = this.props;
-          reset();
-        }
-      });
-    }, 60 * 1000);
+    let {minutes} = this.state;
+
+    if(minutes!==30) this.setState({minutes: 30});
+
+    this.setupInterval();
   };
 
   render() {
@@ -35,6 +28,21 @@ class Timer extends React.Component {
   componentDidMount() {}
   componentWillUnmount() {
     clearInterval(this.minuteInterval);
+  }
+
+  setupInterval = () => {
+    this.minuteInterval = setInterval(() => {
+      let { minutes } = this.state;
+      this.setState({ minutes: minutes - 1 }, () => {
+        let { minutes } = this.state;
+        if (minutes === 0) {
+          new Notification("Times up!");
+          clearInterval(this.minuteInterval);
+          let { reset } = this.props;
+          reset();
+        }
+      });
+    }, 60 * 1000);
   }
 }
 
