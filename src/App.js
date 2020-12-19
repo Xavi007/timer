@@ -54,6 +54,8 @@ const beforeInstall = () => {
 };
 
 const installUserChoice = () => {
+  console.log("user choice", beforeInstallPrompt);
+
   if (!beforeInstallPrompt) return;
   beforeInstallPrompt.userChoice.then((choice) => {
     console.log("USER INSTALL", choice.outcome);
@@ -61,6 +63,7 @@ const installUserChoice = () => {
 };
 
 const install = () => {
+  console.log("install", beforeInstallPrompt);
   if (!beforeInstallPrompt) return;
 
   beforeInstallPrompt.prompt();
