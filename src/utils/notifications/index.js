@@ -7,8 +7,8 @@ export const timeUpNotification = () => {
   const imageUrl = new URL("/notifications/image.jpeg", baseUrl);
 
   console.log("BASE URL", baseUrl);
-  console.log("ICON URL", iconUrl);
-  console.log("IMAGE URL", imageUrl);
+  console.log("ICON URL", iconUrl.href);
+  console.log("IMAGE URL", imageUrl.href);
 
   return new Notification("Times Up!", {
     body: "You already know man.",
