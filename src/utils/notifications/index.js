@@ -12,7 +12,7 @@ export const timeUpNotification = () => {
 
   return new Notification("Times Up!", {
     body: "You already know man.",
-    icon: iconUrl,
-    image: imageUrl,
+    icon: iconUrl.href,
+    image: imageUrl.href,
   });
 };
