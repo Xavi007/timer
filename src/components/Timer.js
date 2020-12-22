@@ -1,11 +1,13 @@
 import React from "react";
 import "./timer.css";
 
+import { timeUpNotification } from "../utils/notifications";
+
 class Timer extends React.Component {
   startTimer = () => {
-    let {minutes} = this.state;
+    let { minutes } = this.state;
 
-    if(minutes!==30) this.setState({minutes: 30});
+    if (minutes !== 30) this.setState({ minutes: 30 });
 
     this.setupInterval();
   };
@@ -36,14 +38,14 @@ class Timer extends React.Component {
       this.setState({ minutes: minutes - 1 }, () => {
         let { minutes } = this.state;
         if (minutes === 0) {
-          new Notification("Times up!");
+          timeUpNotification();
           clearInterval(this.minuteInterval);
           let { reset } = this.props;
           reset();
         }
       });
     }, 60 * 1000);
-  }
+  };
 }
 
 export default Timer;
