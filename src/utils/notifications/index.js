@@ -1,5 +1,5 @@
 export const timeUpNotification = () => {
-  const baseUrl = window.location.protocol;
+  let baseUrl = window.location.protocol;
   baseUrl += "//";
   baseUrl += window.location.hostname;
 
