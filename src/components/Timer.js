@@ -22,7 +22,7 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
 
-    let minutes = 30;
+    let minutes = 1;
 
     this.state = { minutes };
   }
