@@ -39,10 +39,10 @@ class Timer extends React.Component {
         let { minutes } = this.state;
         if (minutes === 0) {
           let notification = timeUpNotification();
-          notification.onclick((e) => {
+          notification.onclick = (e) => {
             console.log("NOTIFICATION CLICK", e);
             window.focus();
-          });
+          };
           clearInterval(this.minuteInterval);
           let { reset } = this.props;
           reset();
