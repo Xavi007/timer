@@ -5,9 +5,9 @@ import { timeUpNotification } from "../utils/notifications";
 
 class Timer extends React.Component {
   startTimer = () => {
-    // let { minutes } = this.state;
+    let { minutes } = this.state;
 
-    // if (minutes !== 30) this.setState({ minutes: 30 });
+    if (minutes !== 30) this.setState({ minutes: 30 });
 
     this.setupInterval();
   };
@@ -22,7 +22,7 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
 
-    let minutes = 1;
+    let minutes = 30;
 
     this.state = { minutes };
   }
