@@ -1,6 +1,8 @@
 import React from "react";
 import "./time-button.css";
 
+import { Button } from "../util-components";
+
 class TimeButton extends React.Component {
   render() {
     let { isNotifyPermit } = this.state;
@@ -9,14 +11,14 @@ class TimeButton extends React.Component {
     return (
       <div className="time-button">
         {!isNotifyPermit && (
-          <button type="button" onClick={this.setupNotify}>
+          <Button type="secondary" action={this.setupNotify}>
             Notify
-          </button>
+          </Button>
         )}
         {isNotifyPermit && (
-          <button type="button" onClick={startTimer}>
+          <Button type="secondary" action={startTimer}>
             Start
-          </button>
+          </Button>
         )}
       </div>
     );

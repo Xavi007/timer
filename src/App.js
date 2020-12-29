@@ -4,6 +4,8 @@ import "./App.css";
 import TimeButton from "./components/TimeButton";
 import Timer from "./components/Timer";
 
+import { Button } from "./util-components";
+
 let beforeInstallPrompt = undefined;
 
 class App extends React.Component {
@@ -14,9 +16,9 @@ class App extends React.Component {
       <div className="App">
         <Timer ref="timer" reset={this.reset} />
         {!isRunning && <TimeButton startTimer={this.startTimer} />}
-        <button type="button" onClick={install}>
+        <Button type="primary" onClick={install}>
           Install
-        </button>
+        </Button>
       </div>
     );
   }

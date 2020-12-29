@@ -1,0 +1,35 @@
+button.app-button {
+  background: none;
+  border: none;
+  outline: none;
+
+  padding: 4px 8px;
+  border-radius: 4px;
+
+  font-family: "WorkSans";
+}
+
+button.app-button.primary {
+  background-color: var(--blue-color);
+  border: 1px solid white;
+
+  color: white;
+  font-family: "WorkSansBoldItalic";
+}
+
+button.app-button.secondary {
+  background-color: white;
+  border: 1px solid var(--gray-color);
+
+  color: black;
+}
+
+button.app-button.primary:hover {
+  background-color: white;
+  border: 1px solid var(--blue-color);
+
+  color: var(--blue-color);
+}
+
+button.app-button.secondary:hover {
+}
