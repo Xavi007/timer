@@ -4,7 +4,7 @@ import "./App.css";
 import TimeButton from "./components/TimeButton";
 import Timer from "./components/Timer";
 
-import { Button } from "./util-components";
+import { Button, Header, Content, Footer } from "./util-components";
 
 let beforeInstallPrompt = undefined;
 
@@ -15,11 +15,16 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Timer ref={this.timerRef} reset={this.reset} />
-        {!isRunning && <TimeButton startTimer={this.startTimer} />}
-        <Button type="primary" onClick={install}>
-          Install
-        </Button>
+        <Header>Header</Header>
+        <Content>
+          <Timer ref={this.timerRef} reset={this.reset} />
+          {!isRunning && <TimeButton startTimer={this.startTimer} />}
+        </Content>
+        <Footer>
+          <Button type="primary" onClick={install}>
+            Install
+          </Button>
+        </Footer>
       </div>
     );
   }
