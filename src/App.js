@@ -18,7 +18,6 @@ class App extends React.Component {
         <Header>Header</Header>
         <Content>
           <Timer ref={this.timerRef} reset={this.reset} />
-          {!isRunning && <TimeButton startTimer={this.startTimer} />}
         </Content>
         <Footer>
           <Button type="primary" onClick={install}>
@@ -44,10 +43,6 @@ class App extends React.Component {
     installUserChoice();
   }
   componentWillUnmount() {}
-
-  startTimer = () => {
-    this.setState({ isRunning: true }, this.timerRef.current.startTimer());
-  };
 
   reset = () => {
     this.setState({ isRunning: false });

@@ -3,28 +3,28 @@ import "./timer.css";
 
 import { timeUpNotification } from "../utils/notifications";
 
+import TimeButton from "./TimeButton";
+
 class Timer extends React.Component {
-  startTimer = () => {
-    let { minutes } = this.state;
-
-    if (minutes !== 30) this.setState({ minutes: 30 });
-
-    this.setupInterval();
-  };
-
   render() {
-    let { minutes } = this.state;
+    let { minutes, isRunning } = this.state;
     console.log(" Timer STATE", minutes);
 
-    return <div className="timer">{minutes} mins</div>;
+    return (
+      <div className="timer">
+        <div className="minutes">{minutes} mins</div>
+        {!isRunning && <TimeButton startTimer={this.startTimer} />}
+      </div>
+    );
   }
 
   constructor(props) {
     super(props);
 
     let minutes = 30;
+    let isRunning = false;
 
-    this.state = { minutes };
+    this.state = { minutes, isRunning };
   }
 
   componentDidMount() {}
@@ -32,23 +32,39 @@ class Timer extends React.Component {
     clearInterval(this.minuteInterval);
   }
 
+  recordStartTime = () => {
+    const currentTime = Date.now();
+  };
+
   setupInterval = () => {
     this.minuteInterval = setInterval(() => {
       let { minutes } = this.state;
       this.setState({ minutes: minutes - 1 }, () => {
         let { minutes } = this.state;
         if (minutes === 0) {
-          let notification = timeUpNotification();
-          notification.onclick = (e) => {
-            console.log("NOTIFICATION CLICK", e);
-            window.focus();
-          };
-          clearInterval(this.minuteInterval);
-          let { reset } = this.props;
-          reset();
+          this.setState({ isRunning: false }, () => {
+            let notification = timeUpNotification();
+            notification.onclick = (e) => {
+              console.log("NOTIFICATION CLICK", e);
+              window.focus();
+            };
+            clearInterval(this.minuteInterval);
+          });
         }
       });
     }, 60 * 1000);
+  };
+
+  startTimer = () => {
+    this.setState({ isRunning: true }, () => {
+      let { minutes } = this.state;
+
+      if (minutes !== 30) this.setState({ minutes: 30 });
+
+      this.recordStartTime();
+
+      this.setupInterval();
+    });
   };
 }
 
