@@ -33,7 +33,9 @@ class Timer extends React.Component {
   }
 
   recordStartTime = () => {
-    const currentTime = Date.now();
+    const currentTime = new Date(Date.now());
+    let { updateLogs } = this.props;
+    updateLogs(currentTime);
   };
 
   setupInterval = () => {

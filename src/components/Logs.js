@@ -1,27 +1,28 @@
 import React from "react";
 import "./logs.css";
 
-const Logs = () => (
-  <div className="logs">
-    <div className="title day">03/01/2021</div>
-    <div className="tracker">
-      <div className="tracks">
-        15:00 <span>up</span>
+import { twoDigitify } from "../utils";
+
+const Logs = (props) => {
+  let { dayLog } = props;
+  return (
+    <div className="logs">
+      <div className="title day">
+        {twoDigitify(dayLog.day.getDate())}/
+        {twoDigitify(dayLog.day.getMonth() + 1)}/{dayLog.day.getFullYear()}
       </div>
-      <div className="tracks">
-        14:00 <span>up</span>
-      </div>
-      <div className="tracks">
-        13:00 <span>up</span>
-      </div>
-      <div className="tracks">
-        12:00 <span>up</span>
-      </div>
-      <div className="tracks">
-        10:00 <span>up</span>
+      <div className="tracker">
+        {dayLog.logs.reverse().map((log, index) => {
+          return (
+            <div className="tracks">
+              {twoDigitify(log.getHours())}:{twoDigitify(log.getMinutes())}{" "}
+              <span>Up</span>
+            </div>
+          );
+        })}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Logs;

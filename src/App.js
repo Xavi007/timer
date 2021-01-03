@@ -4,21 +4,33 @@ import "./App.css";
 import Timer from "./components/Timer";
 import Logs from "./components/Logs";
 
+import { dayLog as mocksLogs } from "./apis/mocks";
+
 import { Button, Header, Content, Footer } from "./util-components";
 
 let beforeInstallPrompt = undefined;
 
 class App extends React.Component {
+  updateLogs = (log) => {
+    let { dayLogs } = this.state;
+    dayLogs.logs.push(log);
+    this.setState({ dayLogs });
+  };
+
   render() {
-    let { isRunning } = this.state;
-    console.log(" App STATE", isRunning);
+    let { dayLogs } = this.state;
+    console.log(" App STATE", dayLogs);
 
     return (
       <div className="App">
         <Header>Header</Header>
         <Content>
-          <Timer ref={this.timerRef} reset={this.reset} />
-          <Logs />
+          <Timer
+            ref={this.timerRef}
+            reset={this.reset}
+            updateLogs={this.updateLogs}
+          />
+          <Logs dayLog={dayLogs} />
         </Content>
         <Footer>
           <Button type="primary" onClick={install}>
@@ -32,9 +44,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    let isRunning = false;
+    let dayLogs = mocksLogs;
 
-    this.state = { isRunning };
+    this.state = { dayLogs };
 
     this.timerRef = React.createRef();
   }
@@ -44,10 +56,6 @@ class App extends React.Component {
     installUserChoice();
   }
   componentWillUnmount() {}
-
-  reset = () => {
-    this.setState({ isRunning: false });
-  };
 }
 
 const beforeInstall = () => {
