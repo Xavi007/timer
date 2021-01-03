@@ -12,9 +12,10 @@ class App extends React.Component {
   render() {
     let { isRunning } = this.state;
     console.log(" App STATE", isRunning);
+
     return (
       <div className="App">
-        <Timer ref="timer" reset={this.reset} />
+        <Timer ref={this.timerRef} reset={this.reset} />
         {!isRunning && <TimeButton startTimer={this.startTimer} />}
         <Button type="primary" onClick={install}>
           Install
@@ -29,6 +30,8 @@ class App extends React.Component {
     let isRunning = false;
 
     this.state = { isRunning };
+
+    this.timerRef = React.createRef();
   }
 
   componentDidMount() {
@@ -38,7 +41,7 @@ class App extends React.Component {
   componentWillUnmount() {}
 
   startTimer = () => {
-    this.setState({ isRunning: true }, this.refs.timer.startTimer());
+    this.setState({ isRunning: true }, this.timerRef.current.startTimer());
   };
 
   reset = () => {
