@@ -1,0 +1,16 @@
+.logs {
+  margin: 5vh 0;
+  color: var(--gray-font);
+}
+
+.logs .day {
+}
+
+.logs .tracker .tracks {
+  padding: 2px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.logs .tracker .tracks:first-child {
+  color: black;
+}

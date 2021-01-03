@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 
-import TimeButton from "./components/TimeButton";
 import Timer from "./components/Timer";
+import Logs from "./components/Logs";
 
 import { Button, Header, Content, Footer } from "./util-components";
 
@@ -18,6 +18,7 @@ class App extends React.Component {
         <Header>Header</Header>
         <Content>
           <Timer ref={this.timerRef} reset={this.reset} />
+          <Logs />
         </Content>
         <Footer>
           <Button type="primary" onClick={install}>

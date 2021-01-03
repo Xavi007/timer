@@ -10,3 +10,10 @@
 
   font-family: "WorkSans";
 }
+
+.App .title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 4px;
+  /* text-decoration: underline; */
+}
