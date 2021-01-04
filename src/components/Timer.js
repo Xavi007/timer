@@ -32,11 +32,7 @@ class Timer extends React.Component {
     clearInterval(this.minuteInterval);
   }
 
-  recordStartTime = () => {
-    const currentTime = new Date(Date.now());
-    let { updateLogs } = this.props;
-    updateLogs(currentTime);
-  };
+  recordStartTime = () => {};
 
   setupInterval = () => {
     this.minuteInterval = setInterval(() => {
@@ -63,7 +59,12 @@ class Timer extends React.Component {
 
       if (minutes !== 30) this.setState({ minutes: 30 });
 
-      this.recordStartTime();
+      let { logStore } = this.props;
+      console.log("START LOG", logStore);
+      logStore.start().then((logStore) => {
+        let { updateLogs } = this.props;
+        updateLogs(logStore);
+      });
 
       this.setupInterval();
     });

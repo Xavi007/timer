@@ -8,17 +8,17 @@ import { dayLog as mocksLogs } from "./apis/mocks";
 
 import { Button, Header, Content, Footer } from "./util-components";
 
+import { LogStore } from "./store/LogStore";
+
 let beforeInstallPrompt = undefined;
 
 class App extends React.Component {
-  updateLogs = (log) => {
-    let { dayLogs } = this.state;
-    dayLogs.logs.push(log);
-    this.setState({ dayLogs });
+  updateLogs = (logStore) => {
+    this.setState({ logStore });
   };
 
   render() {
-    let { dayLogs } = this.state;
+    let { dayLogs, logStore } = this.state;
     console.log(" App STATE", dayLogs);
 
     return (
@@ -28,9 +28,10 @@ class App extends React.Component {
           <Timer
             ref={this.timerRef}
             reset={this.reset}
+            logStore={logStore}
             updateLogs={this.updateLogs}
           />
-          <Logs dayLog={dayLogs} />
+          <Logs logStore={logStore} />
         </Content>
         <Footer>
           <Button type="primary" onClick={install}>
@@ -44,9 +45,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    let dayLogs = mocksLogs;
+    // let dayLogs = mocksLogs;
+    let logStore = new LogStore();
 
-    this.state = { dayLogs };
+    this.state = { logStore };
 
     this.timerRef = React.createRef();
   }
