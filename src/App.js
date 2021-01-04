@@ -4,8 +4,6 @@ import "./App.css";
 import Timer from "./components/Timer";
 import Logs from "./components/Logs";
 
-import { dayLog as mocksLogs } from "./apis/mocks";
-
 import { Button, Header, Content, Footer } from "./util-components";
 
 import { LogStore } from "./store/LogStore";
