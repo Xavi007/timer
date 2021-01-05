@@ -1,3 +1,5 @@
+import { feedback } from "../utils";
+
 export class LogStore {
   constructor() {
     const oldStore = JSON.parse(localStorage.getItem("logs")) || [];
@@ -11,12 +13,16 @@ export class LogStore {
   start = () => {
     return new Promise((resolve, reject) => {
       const currentTime = new Date(Date.now());
+      const log = {
+        time: currentTime,
+        feedback: feedback.okay,
+      };
 
       const isDayLogged = this.logs.some((logDay, i) => {
         if (!logDay) return false;
 
         if (this.matchDate(new Date(logDay.day), currentTime)) {
-          logDay.logs.push(currentTime);
+          logDay.logs.push(log);
           return true;
         } else return false;
       });
@@ -34,7 +40,7 @@ export class LogStore {
           logs: [],
         };
 
-        dayLog.logs.push(currentTime);
+        dayLog.logs.push(log);
         this.logs.push(dayLog);
       }
 

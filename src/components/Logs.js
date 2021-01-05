@@ -1,10 +1,17 @@
 import React from "react";
 import "./logs.css";
 
+import { feedback } from "../utils";
+
+import { mockLogs } from "../apis/mocks";
+
 import { twoDigitify } from "../utils";
+
+import Feedback from "./Feedback";
 
 const Logs = (props) => {
   let { logStore } = props;
+  console.log("logs", logStore.logs);
 
   return (
     <div className="logs">
@@ -18,11 +25,12 @@ const Logs = (props) => {
             </div>
             <div className="tracker">
               {logDay.logs.reverse().map((log, index) => {
-                const logTime = new Date(log);
+                const logTime = new Date(log.time);
                 return (
                   <div className="tracks" key={index}>
                     {twoDigitify(logTime.getHours())}:
-                    {twoDigitify(logTime.getMinutes())} <span>Up</span>
+                    {twoDigitify(logTime.getMinutes())}
+                    <Feedback feedback={log.feedback} />
                   </div>
                 );
               })}

@@ -1,0 +1,12 @@
+span {
+  font-size: 13px;
+}
+span.good {
+  color: green;
+}
+span.bad {
+  color: orange;
+}
+span.error {
+  color: red;
+}

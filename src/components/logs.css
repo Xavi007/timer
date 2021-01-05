@@ -11,6 +11,6 @@
   display: flex;
   justify-content: space-between;
 }
-.logs .tracker .tracks:first-child {
+.logs .log:first-child .tracker .tracks:first-child {
   color: black;
 }
