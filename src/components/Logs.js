@@ -8,7 +8,7 @@ const Logs = (props) => {
 
   return (
     <div className="logs">
-      {logStore.logs.map((logDay, index) => {
+      {logStore.logs.reverse().map((logDay, index) => {
         const refDay = new Date(logDay.day);
         return (
           <div className="log" key={index}>
