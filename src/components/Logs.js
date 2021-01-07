@@ -3,7 +3,7 @@ import "./logs.css";
 
 import { feedback } from "../utils";
 
-import { mockLogs } from "../apis/mocks";
+// import { mockLogs } from "../apis/mocks";
 
 import { twoDigitify, sortLogDays, sortLogTracks } from "../utils";
 
