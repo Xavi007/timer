@@ -53,6 +53,17 @@ export class LogStore {
     });
   };
 
+  update = () => {
+    return new Promise((resolve, reject) => {
+      try {
+        localStorage.setItem("logs", JSON.stringify(this.logs));
+        resolve(this);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  };
+
   matchDate = (date1, date2) => {
     if (!(date1 instanceof Date)) console.error("Date1 is not type date");
     if (!(date2 instanceof Date)) console.error("Date2 is not type date");

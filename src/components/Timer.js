@@ -45,6 +45,8 @@ class Timer extends React.Component {
             notification.onclick = (e) => {
               console.log("NOTIFICATION CLICK", e);
               window.focus();
+              let { getFeedback } = this.props;
+              getFeedback();
             };
             clearInterval(this.minuteInterval);
           });

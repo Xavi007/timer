@@ -12,11 +12,15 @@ let beforeInstallPrompt = undefined;
 
 class App extends React.Component {
   updateLogs = (logStore) => {
-    this.setState({ logStore });
+    this.setState({ logStore, isFeedbackTime: false });
+  };
+
+  getFeedback = () => {
+    this.setState({ isFeedbackTime: true });
   };
 
   render() {
-    let { dayLogs, logStore } = this.state;
+    let { dayLogs, logStore, isFeedbackTime } = this.state;
     console.log(" App STATE", dayLogs);
 
     return (
@@ -28,8 +32,13 @@ class App extends React.Component {
             reset={this.reset}
             logStore={logStore}
             updateLogs={this.updateLogs}
+            getFeedback={this.getFeedback}
           />
-          <Logs logStore={logStore} />
+          <Logs
+            logStore={logStore}
+            isFeedbackTime={isFeedbackTime}
+            updateLogs={this.updateLogs}
+          />
         </Content>
         <Footer>
           <Button type="primary" onClick={install}>
@@ -45,8 +54,9 @@ class App extends React.Component {
 
     // let dayLogs = mocksLogs;
     let logStore = new LogStore();
+    let isFeedbackTime = false;
 
-    this.state = { logStore };
+    this.state = { logStore, isFeedbackTime };
 
     this.timerRef = React.createRef();
   }
