@@ -1,0 +1,10 @@
+.project-input {
+  display: grid;
+  grid-template-columns: 80% 19%;
+  grid-gap: 1%;
+}
+
+.project-input input {
+  height: 28px;
+  padding: 4px;
+}

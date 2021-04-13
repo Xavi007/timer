@@ -29,3 +29,18 @@ const sortLogTracks = (logTrack1, logTrack2) => {
 };
 
 export { sortLogTracks };
+
+export const getLocalProjects = () => {
+  let projectList = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+
+    let keySplit = key.split(":");
+
+    if (keySplit[0].toLowerCase().includes("project")) {
+      projectList.push(keySplit[1]);
+    }
+  }
+
+  return { projectList };
+};

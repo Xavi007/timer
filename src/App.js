@@ -4,6 +4,8 @@ import "./App.css";
 import Timer from "./components/Timer";
 import Logs from "./components/Logs";
 
+import { ProjectList, ProjectInput } from "./components/Projects";
+
 import { Button, Header, Content, Footer } from "./util-components";
 
 import { LogStore } from "./store/LogStore";
@@ -34,16 +36,20 @@ class App extends React.Component {
             updateLogs={this.updateLogs}
             getFeedback={this.getFeedback}
           />
-          <Logs
+          <ProjectList />
+          {/*<Logs
             logStore={logStore}
             isFeedbackTime={isFeedbackTime}
             updateLogs={this.updateLogs}
-          />
+          /> */}
         </Content>
         <Footer>
+          {/*
           <Button type="primary" onClick={install}>
             Install
           </Button>
+          */}
+          <ProjectInput />
         </Footer>
       </div>
     );
