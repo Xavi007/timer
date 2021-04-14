@@ -1,8 +1,11 @@
 .header {
   height: 4vh;
-  width: 100%;
+  width: 480px;
   max-width: 520px;
-  text-align: center;
+  display: flex;
+  margin: 4px 0;
 
   background-color: var(--gray-color);
+  align-items: center;
+  justify-content: center;
 }

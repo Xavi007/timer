@@ -1,6 +1,8 @@
 import React from "react";
 import "./project-input.css";
 
+import { v4 as uuid } from "uuid";
+
 import { Button } from "../../util-components";
 
 import { projectListStore, setProjectList } from "../../utils/redux";
@@ -43,7 +45,11 @@ class ProjectInput extends React.Component {
     console.log("PROJECT NAME", projectName, this.state);
     if (!projectName) return;
 
-    localStorage.setItem("project:" + projectName, "");
+    const project = {
+      name: projectName,
+      projectID: uuid(),
+    };
+    localStorage.setItem("project:" + projectName, JSON.stringify(project));
 
     this.setState({ projectName: "" });
 

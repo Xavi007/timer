@@ -17,3 +17,8 @@
   padding: 4px;
   /* text-decoration: underline; */
 }
+
+.App a {
+  color: black;
+  text-decoration: none;
+}

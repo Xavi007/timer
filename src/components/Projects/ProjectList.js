@@ -1,6 +1,8 @@
 import React from "react";
 import "./project-list.css";
 
+import { Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
@@ -16,22 +18,30 @@ const ProjectList = () => {
 
   return (
     <div className="project-list">
-      {projectList.map((project, index) => {
+      {projectList.map((projectName, index) => {
+        const project = JSON.parse(
+          localStorage.getItem("project:" + projectName)
+        );
+
         return (
-          <div className="project" key={index}>
-            <span>{project}</span>{" "}
-            <Button type="secondary">
-              <FontAwesomeIcon icon={faEdit} />
-            </Button>
-            <Button
-              type="secondary"
-              action={() => {
-                deleteProject(project);
-              }}
-            >
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </Button>
-          </div>
+          <Link to={`/project/${project.projectID}`} key={project.projectID}>
+            <div className="project">
+              <span>{projectName}</span>{" "}
+              <Button type="secondary">
+                <FontAwesomeIcon icon={faEdit} />
+              </Button>
+              <Button
+                type="secondary"
+                action={(e) => {
+                  console.log("action event", e);
+                  e.preventDefault();
+                  deleteProject(projectName);
+                }}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </Button>
+            </div>
+          </Link>
         );
       })}
     </div>

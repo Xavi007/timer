@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+
 import Timer from "./components/Timer";
 import Logs from "./components/Logs";
 
@@ -26,32 +28,52 @@ class App extends React.Component {
     console.log(" App STATE", dayLogs);
 
     return (
-      <div className="App">
-        <Header>Header</Header>
-        <Content>
-          <Timer
-            ref={this.timerRef}
-            reset={this.reset}
-            logStore={logStore}
-            updateLogs={this.updateLogs}
-            getFeedback={this.getFeedback}
-          />
-          <ProjectList />
-          {/*<Logs
+      <Router>
+        <div className="App">
+          <Link to="/">
+            <Header>My projects</Header>
+          </Link>
+
+          <Content>
+            <Switch>
+              <Route path="/" exact>
+                <ProjectList />
+              </Route>
+              <Route path="/project/:projectID">
+                <Timer
+                  ref={this.timerRef}
+                  reset={this.reset}
+                  logStore={logStore}
+                  updateLogs={this.updateLogs}
+                  getFeedback={this.getFeedback}
+                />
+                <Logs
+                  logStore={logStore}
+                  isFeedbackTime={isFeedbackTime}
+                  updateLogs={this.updateLogs}
+                />
+              </Route>
+            </Switch>
+            {/*<Logs
             logStore={logStore}
             isFeedbackTime={isFeedbackTime}
             updateLogs={this.updateLogs}
           /> */}
-        </Content>
-        <Footer>
-          {/*
-          <Button type="primary" onClick={install}>
-            Install
-          </Button>
-          */}
-          <ProjectInput />
-        </Footer>
-      </div>
+          </Content>
+          <Footer>
+            <Switch>
+              <Route path="/" exact>
+                <ProjectInput />
+              </Route>
+              <Route path="/project/:projectID">
+                <Button type="primary" onClick={install}>
+                  Install
+                </Button>
+              </Route>
+            </Switch>
+          </Footer>
+        </div>
+      </Router>
     );
   }
 
