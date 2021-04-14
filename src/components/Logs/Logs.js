@@ -1,13 +1,13 @@
 import React from "react";
 import "./logs.css";
 
-import { feedback } from "../utils";
+import { feedback } from "../../utils";
 
 // import { mockLogs } from "../apis/mocks";
 
-import { twoDigitify, sortLogDays, sortLogTracks } from "../utils";
+import { twoDigitify, sortLogDays, sortLogTracks } from "../../utils";
 
-import Feedback from "./Feedback";
+import Feedback from "../Feedback";
 
 const Logs = (props) => {
   let { logStore, isFeedbackTime } = props;

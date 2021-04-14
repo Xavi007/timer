@@ -24,7 +24,10 @@ const ProjectList = () => {
         );
 
         return (
-          <Link to={`/project/${project.projectID}`} key={project.projectID}>
+          <Link
+            to={`/project/${project.projectID}/${projectName}`}
+            key={project.projectID}
+          >
             <div className="project">
               <span>{projectName}</span>{" "}
               <Button type="secondary">

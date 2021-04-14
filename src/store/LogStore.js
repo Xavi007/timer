@@ -1,9 +1,11 @@
 import { feedback } from "../utils";
 
 export class LogStore {
-  constructor() {
-    const oldStore = JSON.parse(localStorage.getItem("logs")) || [];
-    this.logs = oldStore;
+  constructor(project) {
+    this.project = project;
+    const oldStore = JSON.parse(localStorage.getItem(project));
+    this.projectStore = oldStore;
+    this.logs = oldStore.logs || [];
 
     return this;
     // get from local storage
@@ -45,7 +47,8 @@ export class LogStore {
       }
 
       try {
-        localStorage.setItem("logs", JSON.stringify(this.logs));
+        this.projectStore.logs = this.logs;
+        localStorage.setItem(this.project, JSON.stringify(this.projectStore));
         resolve(this);
       } catch {
         reject();
@@ -56,7 +59,8 @@ export class LogStore {
   update = () => {
     return new Promise((resolve, reject) => {
       try {
-        localStorage.setItem("logs", JSON.stringify(this.logs));
+        this.projectStore.logs = this.logs;
+        localStorage.setItem(this.project, JSON.stringify(this.projectStore));
         resolve(this);
       } catch (err) {
         reject(err);

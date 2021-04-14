@@ -1,9 +1,9 @@
 import React from "react";
 import "./timer.css";
 
-import { timeUpNotification } from "../utils/notifications";
+import { timeUpNotification } from "../../utils/notifications";
 
-import TimeButton from "./TimeButton";
+import TimeButton from "../TimeButton";
 
 class Timer extends React.Component {
   render() {
@@ -52,7 +52,7 @@ class Timer extends React.Component {
           });
         }
       });
-    }, 60 * 1000);
+    }, 500);
   };
 
   startTimer = () => {
