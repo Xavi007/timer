@@ -52,7 +52,7 @@ class Timer extends React.Component {
           });
         }
       });
-    }, 500);
+    }, 60 * 1000);
   };
 
   startTimer = () => {
