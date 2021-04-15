@@ -25,7 +25,7 @@ const Logs = (props) => {
             </div>
             <div className="tracker">
               {logDay.logs.sort(sortLogTracks).map((log, logIndex) => {
-                const logTime = new Date(log.time);
+                const logTime = new Date(log.startTime);
                 return (
                   <div className="tracks" key={logIndex}>
                     {twoDigitify(logTime.getHours())}:

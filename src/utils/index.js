@@ -44,3 +44,34 @@ export const getLocalProjects = () => {
 
   return { projectList };
 };
+
+export const updateRowToSheety = (log) => {
+  let url =
+    "https://api.sheety.co/8162b8ece6995f7642dc10f4ef024130/persistence/sheet1";
+  let body = {
+    sheet1: {
+      ...log,
+    },
+  };
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(body),
+    mode: "cors",
+    headers: {
+      Authorization: "Bearer $persistence_abcd",
+      ContentType: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      // Do something with object
+      console.log(json.sheet1);
+    });
+};
+
+export const getDateString = (day) =>
+  twoDigitify(day.getDay()) +
+  "/" +
+  twoDigitify(day.getMonth()) +
+  "/" +
+  twoDigitify(day.getYear());

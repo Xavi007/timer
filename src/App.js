@@ -10,9 +10,26 @@ import { Button, Header, Content, Footer } from "./util-components";
 
 let beforeInstallPrompt = undefined;
 
+const syncProjectTracks = () => {
+  let url =
+    "https://api.sheety.co/8162b8ece6995f7642dc10f4ef024130/persistence/sheet1";
+  fetch(url, {
+    headers: {
+      Authorization: "Bearer $persistence_abcd",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      // Do something with the data
+      console.log(json.sheet1S);
+    });
+};
+
 const App = () => {
   beforeInstall();
   installUserChoice();
+
+  syncProjectTracks();
 
   return (
     <Router>

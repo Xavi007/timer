@@ -1,4 +1,5 @@
-import { feedback } from "../utils";
+import { feedback, getDateString, updateRowToSheety } from "../utils";
+import { v4 as uuid } from "uuid";
 
 export class LogStore {
   constructor(project) {
@@ -16,14 +17,17 @@ export class LogStore {
     return new Promise((resolve, reject) => {
       const currentTime = new Date(Date.now());
       const log = {
-        time: currentTime,
+        startTime: currentTime,
         feedback: feedback.okay,
+        jobId: "job_" + uuid(),
       };
 
+      let day;
       const isDayLogged = this.logs.some((logDay, i) => {
         if (!logDay) return false;
 
-        if (this.matchDate(new Date(logDay.day), currentTime)) {
+        day = new Date(logDay.day);
+        if (this.matchDate(day, currentTime)) {
           logDay.logs.push(log);
           return true;
         } else return false;
@@ -37,8 +41,9 @@ export class LogStore {
         dayRef.setSeconds(0);
         dayRef.setMilliseconds(0);
 
+        day = dayRef;
         const dayLog = {
-          day: dayRef,
+          day,
           logs: [],
         };
 
@@ -48,10 +53,22 @@ export class LogStore {
 
       try {
         this.projectStore.logs = this.logs;
+
+        const sheetyLog = {
+          day: getDateString(day),
+          projectName: this.projectStore.name,
+          projectId: this.projectStore.projectId,
+          ...log,
+        };
+
+        updateRowToSheety(sheetyLog);
+
+        console.log("day", log["day"]);
+
         localStorage.setItem(this.project, JSON.stringify(this.projectStore));
         resolve(this);
-      } catch {
-        reject();
+      } catch (err) {
+        reject(err);
       }
     });
   };

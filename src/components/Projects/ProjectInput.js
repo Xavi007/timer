@@ -47,7 +47,7 @@ class ProjectInput extends React.Component {
 
     const project = {
       name: projectName,
-      projectID: uuid(),
+      projectId: "project_" + uuid(),
     };
     localStorage.setItem("project:" + projectName, JSON.stringify(project));
 

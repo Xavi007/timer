@@ -63,10 +63,15 @@ class Timer extends React.Component {
 
       let { logStore } = this.props;
       console.log("START LOG", logStore);
-      logStore.start().then((logStore) => {
-        let { updateLogs } = this.props;
-        updateLogs(logStore);
-      });
+      logStore
+        .start()
+        .then((logStore) => {
+          let { updateLogs } = this.props;
+          updateLogs(logStore);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
 
       this.setupInterval();
     });
